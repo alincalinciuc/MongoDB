@@ -1,0 +1,30 @@
+function emit(k,v){ 
+  print("emit"); 
+  print(" k: "+k+" v: "+v); 
+}
+
+function map_city(){
+    var numeric=(['0','1','2','3','4','5','6','7','8','9']);
+    var prima_litera=this.city.substr(0,1);
+    var ok=numeric.indexOf(prima_litera);
+    if(ok==-1){
+         emit("orase",1);
+    }
+    else {
+         emit("orase",0);
+    }
+}
+
+x=db.zips.findOne();
+map_city.apply(x);
+
+function reduce_city(key,values){
+var result = 0;
+    for(var i = 0; i < values.length; i++)
+    {
+        result += values[i];
+    }
+    return result;
+}
+
+db.zips.mapReduce(map_city,reduce_city,{out:{inline:1}})
