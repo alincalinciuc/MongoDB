@@ -1,3 +1,8 @@
+function emit(k,v){ 
+  print("emit"); 
+  print(" k: "+k+" v: "+v); 
+}
+
 function map_closest() {
     var pitt = [-80.064879, 40.612044];
     var phil = [-74.978052, 40.089738];
@@ -15,6 +20,8 @@ function map_closest() {
     }
 }
 
+x=db.zips.findOne();
+map_closest.apply(x);
 
 function reduce_closest(key, values) { 
     var result = 0;
